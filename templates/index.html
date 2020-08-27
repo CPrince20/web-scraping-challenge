@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+    <style>
+         * {
+          box-sizing: border-box;
+        }
+        
+        body {
+          margin: 0;
+          font-family: Arial;
+        }
+        .header {
+          text-align: center;
+          padding: 25px;
+        }
+        
+        .row {
+          display: -ms-flexbox; 
+          display: flex;
+          -ms-flex-wrap: wrap; 
+          flex-wrap: wrap;
+          padding: 0 10px;
+        }
+        
+        .column {
+          -ms-flex: 50%; 
+          flex: 50%;
+          max-width: 50%;
+          padding: 0 10px;
+         
+        }
+        
+        img {
+          margin-top: 8px;
+          vertical-align: middle;
+          width: 100%;
+        }
+
+        @media screen and (max-width: 600px) {
+          .column {
+            -ms-flex: 100%;
+            flex: 100%;
+            max-width: 100%;
+          }
+        }
+    </style>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viweport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+</head>
+<body>
+    <div class="container-fluid">
+        <div class="jumbotron text-center" style="background-color:lightgray;">
+            <h1 class="text-black">Mission To Mars</h1>
+            <p><a class="btn btn-primary btn-lg" href="/scrape" role="button">Scrape New Data</a></p>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <h2>Latest Mars News</h2>
+                <h4>{{mars_dictionary.headline}}</h4>
+                <p>{{mars_dictionary.teaser}}</p>
+                <br>
+                <br>
+                <br>
+            </div>
+        </div>
+        <div class ="row">
+            <div class="col-md-6">
+                <h2 class="text-center text-black">Featured Mars Image</h2>
+                <img src="{{mars_dictionary.featured_image}}" style="width:100%">
+            </div>
+            <div class="col-lg-22">
+                <h3 class="text-center">Mars Facts</h3>
+                {{mars_dictionary.mars_facts|safe}}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-8">
+                <br>
+                <br>
+                <h2 class="text-center text-black">Mars Hemispheres</h2>
+            </div>
+        </div>
+        
+    </div>
+    <div class="container-fluid">
+        <div class="row">
+            {% for image in mars_dictionary.hemisphere_images %}
+                <div>
+                    <div>
+                        <img src="{{image.main_image}}" style="width:500px;height:500px;padding:30px;" >
+                    </div>
+                    <div>
+                        <h3>{{image.hemisphere}}</h3>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</body>
+</html>
